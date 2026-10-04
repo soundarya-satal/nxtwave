@@ -49,6 +49,7 @@ export default async function CardPage({ params }: P) {
       </div>
       <Pallbearers code={code} />
       <Link href="/resurrect" className="text-sm text-emerald-300 underline">Already built something? Submit it for your certificate</Link>
+      <Link href="/build" className="text-sm text-neutral-400 underline">Join the live build room</Link>
       <Link href={`/?src=share&ref=${code}`} className="text-sm text-neutral-500 underline">Bury your own</Link>
     </main>
   );

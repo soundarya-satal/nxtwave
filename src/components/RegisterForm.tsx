@@ -20,7 +20,7 @@ export default function RegisterForm({ slots }: { slots: Slot[] }) {
     const t = getTrack();
     tr.current = t;
     const q = new URLSearchParams(location.search);
-    let own = ""; try { own = localStorage.getItem("tg_card") ?? ""; } catch {}
+    let own = ""; try { own = localStorage.getItem("tg_card") ?? ""; } catch { }
     setIds({ card: q.get("card") || own, ref: q.get("ref") || t.ref });
   }, []);
 
@@ -61,6 +61,7 @@ export default function RegisterForm({ slots }: { slots: Slot[] }) {
             Bury your tutorial and get your pallbearer link
           </Link>
         )}
+        <Link href="/build" className="text-sm text-neutral-400 underline">See the live build room</Link>
       </div>
     );
 
