@@ -28,6 +28,7 @@ export default async function Certificate({ params }: P) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`/api/cert/${code}`} alt="Resurrection Certificate" className="w-full max-w-2xl rounded-2xl border border-neutral-800" />
       <CertActions code={code} deceased={c.deceased} repo={c.repo} score={c.score} builder={c.builder} />
+      <Link href={`/card/${code}`} className="text-sm text-neutral-400 underline">← Back to my tombstone</Link>
       <Link href="/" className="text-sm text-neutral-500 underline">Bury another tutorial</Link>
     </main>
   );

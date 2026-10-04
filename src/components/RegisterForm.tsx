@@ -67,6 +67,9 @@ export default function RegisterForm({ slots }: { slots: Slot[] }) {
 
   return (
     <form onSubmit={submit} className="w-full max-w-md flex flex-col gap-4">
+      <Link href={ids.card ? `/card/${ids.card}` : "/"} className="text-sm text-neutral-400 hover:text-neutral-100">
+        ← {ids.card ? "Back to my tombstone" : "Home"}
+      </Link>
       <h1 className="text-2xl font-bold">Hold your seat</h1>
       <p className="text-sm text-neutral-400">Free workshop: Build Your First AI Project in 60 Minutes.</p>
       <input required className={input} placeholder="Full name" value={f.name} maxLength={80} onChange={(e) => set("name", e.target.value)} />

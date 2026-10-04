@@ -5,7 +5,8 @@ import { getCounts } from "@/lib/stats";
 import { DIAG_LINE } from "@/lib/diagnosis";
 import ShareButtons from "../../../components/ShareButtons";
 import RegisterCTA from "@/components/RegisterCTA";
-import Pallbearers from "@/components/Pallbearers"
+import Pallbearers from "@/components/Pallbearers";
+import CardBottomLinks from "@/components/CardBottomLinks";
 
 export const dynamic = "force-dynamic";
 type P = { params: Promise<{ code: string }> };
@@ -48,9 +49,7 @@ export default async function CardPage({ params }: P) {
         <RegisterCTA code={code} />
       </div>
       <Pallbearers code={code} />
-      <Link href="/resurrect" className="text-sm text-emerald-300 underline">Already built something? Submit it for your certificate</Link>
-      <Link href="/build" className="text-sm text-neutral-400 underline">Join the live build room</Link>
-      <Link href={`/?src=share&ref=${code}`} className="text-sm text-neutral-500 underline">Bury your own</Link>
+      <CardBottomLinks code={code} />
     </main>
   );
 }

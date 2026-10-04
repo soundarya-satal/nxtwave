@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MAX = { demo_readme: 40, ai_component: 25, scope: 15, explanation: 20 } as const;
 const LABEL = { demo_readme: "Working demo + README", ai_component: "AI component", scope: "Sensible scope", explanation: "Your explanation" } as const;
@@ -16,7 +16,9 @@ export default function ResurrectForm() {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   const [res, setRes] = useState<R | null>(null);
+  const [card, setCard] = useState("");
   const set = (k: string, v: string) => setF((p) => ({ ...p, [k]: v }));
+  useEffect(() => { try { setCard(localStorage.getItem("tg_card") ?? ""); } catch { } }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,6 +37,9 @@ export default function ResurrectForm() {
   return (
     <div className="w-full max-w-md flex flex-col gap-5">
       <form onSubmit={submit} className="flex flex-col gap-4">
+        <Link href={card ? `/card/${card}` : "/"} className="text-sm text-neutral-400 hover:text-neutral-100">
+          ← {card ? "My tombstone" : "Home"}
+        </Link>
         <h1 className="text-2xl font-bold">Resurrect it</h1>
         <p className="text-sm text-neutral-400">Submit what you built to get instant feedback and your Resurrection Certificate.</p>
         <input required type="email" className={input} placeholder="The email you held your seat with" value={f.email} maxLength={120} onChange={(e) => set("email", e.target.value)} />
