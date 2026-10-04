@@ -90,6 +90,7 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
     <main className="min-h-screen bg-neutral-950 text-neutral-100 px-5 py-8 flex justify-center">
       <div className="w-full max-w-4xl flex flex-col gap-5">
         <h1 className="text-2xl font-bold">Tutorial Graveyard: admin</h1>
+        <a href="/build/host" className="text-sm text-emerald-300 underline">Open the host view (live stuck count)</a>
 
         <section className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {[
