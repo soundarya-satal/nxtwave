@@ -29,7 +29,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
           {names ? <div style={{ display: "flex", marginTop: 18, fontSize: 24, color: muted }}>{`Pallbearers: ${names}`}</div> : null}
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 30 }}>
-          <div style={{ display: "flex", fontSize: 34 }}>{`${n.buried} buried · ${n.pledged} pledged to resurrect`}</div>
+          <div style={{ display: "flex", fontSize: 32 }}>{`${n.buried} buried · ${n.pledged} pledged · ${n.resurrected} resurrected`}</div>
           <div style={{ display: "flex", fontSize: 24, color: "#7d8590", marginTop: 8 }}>{`${n.label} · Bury yours at ${host}`}</div>
         </div>
       </div>

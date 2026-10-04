@@ -39,7 +39,7 @@ export default async function CardPage({ params }: P) {
       <div className="max-w-sm w-full text-center flex flex-col gap-2">
         <p className="font-semibold">{c.diagnosis}</p>
         <p className="text-sm text-neutral-400">{DIAG_LINE[c.diagnosis]}</p>
-        <p className="text-sm text-neutral-500">{n.label}: {n.buried} buried · {n.pledged} pledged to resurrect</p>
+        <p className="text-sm text-neutral-500">{n.label}: {n.buried} buried · {n.pledged} pledged · {n.resurrected} resurrected</p>
       </div>
       <ShareButtons code={code} what={c.what} />
       <div className="max-w-sm w-full rounded-2xl border border-emerald-900 bg-emerald-950/40 p-5 text-center flex flex-col gap-3">
@@ -48,6 +48,7 @@ export default async function CardPage({ params }: P) {
         <RegisterCTA code={code} />
       </div>
       <Pallbearers code={code} />
+      <Link href="/resurrect" className="text-sm text-emerald-300 underline">Already built something? Submit it for your certificate</Link>
       <Link href={`/?src=share&ref=${code}`} className="text-sm text-neutral-500 underline">Bury your own</Link>
     </main>
   );

@@ -15,7 +15,7 @@ const COPY: Record<string, { h: string; p: string }> = {
   },
 };
 
-export default function Landing({ buried, pledged }: { buried: number; pledged: number }) {
+export default function Landing({ buried, pledged, resurrected }: { buried: number; pledged: number; resurrected: number }) {
   const [variant, setVariant] = useState("");
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Landing({ buried, pledged }: { buried: number; pledged: 
         <Link href="/bury" className="w-full sm:w-auto rounded-full bg-emerald-400 text-neutral-950 font-semibold px-8 py-4">
           Bury yours (60 seconds)
         </Link>
-        <p className="text-sm text-neutral-500">{buried} buried so far · {pledged} pledged to resurrect</p>
+        <p className="text-sm text-neutral-500">{buried} buried · {pledged} pledged to resurrect · {resurrected} resurrected</p>
 
         <div className="mt-6 w-full rounded-2xl border border-neutral-800 bg-neutral-900 p-5 flex flex-col gap-3">
           <p className="text-neutral-300 italic">{HOOK}</p>

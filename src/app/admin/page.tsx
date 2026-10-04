@@ -58,7 +58,7 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
   if (!(await isAdmin())) return <Login error={e} />;
 
   const head = (t: string) => db.from(t).select("*", { count: "exact", head: true });
-  const [v, s, c, ref, cards, ai, regs, viaRef, slots] = await Promise.all([
+  const [v, s, c, ref, cards, ai, regs, viaRef, slots, subs] = await Promise.all([
     db.from("funnel_by_variant").select("*"),
     db.from("funnel_by_source").select("*"),
     db.from("college_stats").select("*"),
@@ -68,8 +68,11 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
     head("registrations"),
     head("registrations").not("ref_code", "is", null),
     slotUsage(),
+    db.from("submissions").select("card_code,passed").limit(5000),
   ]);
 
+  const attempts = subs.data ?? [];
+  const resurrected = new Set(attempts.filter((x) => x.passed).map((x) => x.card_code)).size;
   const byVisits = (a: F[]) => [...a].sort((x, y) => num(y.visits) - num(x.visits));
   const variants = byVisits((v.data ?? []) as F[]);
   const sources = byVisits((s.data ?? []) as F[]);
@@ -88,12 +91,13 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
       <div className="w-full max-w-4xl flex flex-col gap-5">
         <h1 className="text-2xl font-bold">Tutorial Graveyard: admin</h1>
 
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <section className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {[
             ["Buried (cards)", cards.count ?? 0],
             ["AI-written", `${ai.count ?? 0} of ${cards.count ?? 0}`],
             ["Pledged (registered)", regs.count ?? 0],
             ["Via a friend's link", viaRef.count ?? 0],
+            ["Resurrected (passed)", `${resurrected} · ${attempts.length} attempts`],
           ].map(([l, x]) => (
             <div key={String(l)} className={box}><p className="text-xs text-neutral-400">{l}</p><p className="text-2xl font-bold">{x}</p></div>
           ))}
