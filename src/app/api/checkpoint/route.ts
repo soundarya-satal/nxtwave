@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { allow } from "@/lib/rateLimit";
-import { isAdmin } from "@/lib/adminAuth";
 import { MINUTES } from "@/lib/sample";
 
 export async function POST(req: Request) {
@@ -16,7 +15,6 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  if (!(await isAdmin())) return Response.json({ error: "no" }, { status: 401 });
   const { data } = await db.from("checkpoints").select("minute,status").limit(5000);
   const out = MINUTES.map((m) => {
     const rows = (data ?? []).filter((r) => r.minute === m);

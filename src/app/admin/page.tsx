@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { isAdmin } from "@/lib/adminAuth";
 import { slotUsage } from "@/lib/slots";
 import { UNLOCK_AT } from "@/lib/config";
 
@@ -13,19 +12,6 @@ const box = "rounded-2xl border border-neutral-800 bg-neutral-900 p-5";
 const th = "text-left font-medium text-neutral-400 py-2 pr-4";
 const td = "py-2 pr-4";
 
-function Login({ error }: { error?: string }) {
-  return (
-    <main className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-5">
-      <form method="post" action="/api/admin/login" className="w-full max-w-xs flex flex-col gap-3">
-        <h1 className="text-xl font-bold">Admin</h1>
-        <input name="password" type="password" required autoFocus placeholder="Password"
-          className="rounded-xl bg-neutral-900 border border-neutral-700 px-4 py-3 outline-none focus:border-emerald-400" />
-        {error && <p className="text-sm text-red-400">{error === "wait" ? "Too many attempts. Wait a few minutes." : "Wrong password."}</p>}
-        <button className="rounded-full bg-emerald-400 text-neutral-950 font-semibold py-3">Enter</button>
-      </form>
-    </main>
-  );
-}
 
 function Funnel({ title, rows }: { title: string; rows: F[] }) {
   return (
@@ -53,9 +39,7 @@ function Funnel({ title, rows }: { title: string; rows: F[] }) {
   );
 }
 
-export default async function Admin({ searchParams }: { searchParams: Promise<{ e?: string }> }) {
-  const { e } = await searchParams;
-  if (!(await isAdmin())) return <Login error={e} />;
+export default async function Admin() {
 
   const head = (t: string) => db.from(t).select("*", { count: "exact", head: true });
   const [v, s, c, ref, cards, ai, regs, viaRef, slots, subs] = await Promise.all([
