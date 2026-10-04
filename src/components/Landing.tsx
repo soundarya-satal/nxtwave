@@ -55,6 +55,7 @@ export default function Landing({ buried, pledged, resurrected }: { buried: numb
           </button>
         </div>
         <p className="text-xs text-neutral-600">We only joke about the course. Never about you.</p>
+        <Link href="/guide" className="text-sm text-emerald-300 underline">Reviewing this project? Start here</Link>
         <a href="/admin" className="text-xs text-neutral-800 hover:text-neutral-500">Admin</a>
       </div>
     </main>
